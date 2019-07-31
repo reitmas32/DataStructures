@@ -37,7 +37,7 @@ public:
     }
 
     //Destructor
-    ~Node(){free(this)}
+    ~Node(){free(this);}
 
     //Getters
     Item  GetData(){return data;}
