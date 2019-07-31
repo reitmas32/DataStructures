@@ -19,15 +19,15 @@ private:
     Node<Item>* cursor;
     size_t len;
 
-    Node<Item>* getFirst(){ return first;}
-    Node<Item>* getLast(){ return last;}
-    Node<Item>* getCursor(){ return cursor;}
-    size_t getLen(){ return len;}
+    Node<Item>* GetFirst(){ return first;}
+    Node<Item>* GetLast(){ return last;}
+    Node<Item>* GetCursor(){ return cursor;}
+    size_t GetLen(){ return len;}
 
-    void setFirst(Node<Item>* _first){first = _first;}
-    void setLast(Node<Item>* _last){last = _last;}
-    void setCursor(Node<Item>* _cursor){cursor = _cursor;}
-    void setLen(size_t _len){ len = _len;}
+    void SetFirst(Node<Item>* _first){first = _first;}
+    void SetLast(Node<Item>* _last){last = _last;}
+    void SetCursor(Node<Item>* _cursor){cursor = _cursor;}
+    void SetLen(size_t _len){ len = _len;}
 
     void lenUp(){++len;}
     void lenDown(){--len;}
@@ -59,11 +59,11 @@ public:
     void CursorPrev();
 
     //Empty
-    bool IsEmpty(){return getLen() == 0;}
+    bool IsEmpty(){return GetLen() == 0;}
     void MakeEmpty();
 
     //Len
-    size_t Len(){ return getLen();}
+    size_t Len(){ return GetLen();}
 
     //Search
     bool FindIf(Item _key, bool (*cmp)(Item,Item));

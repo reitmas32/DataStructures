@@ -1,6 +1,7 @@
 #include <iostream>
 
-#include "Node.hpp"
+#include "DLL.hpp"
+#include "DLL.cpp"
 
 using namespace std;
 
@@ -10,9 +11,13 @@ using namespace std;
 
 int main(void){
 
-    Node<int> miNode(3);
+    DLL<int> miNode;
 
-    cout<<miNode.GetData();
+    miNode.InsertBack(5);
+    int n;
+    miNode.RemoveFront(&n);
+
+    cout<<n;
 
     return 0;
 }
