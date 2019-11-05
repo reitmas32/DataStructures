@@ -1,13 +1,13 @@
 /**
   * @file    Node.hpp
   * @version 2.0
-  * @date    17/07/2019
+  * @date    14/07/2019
   * @author  Zamora Ramírez Oswaldo Rafael
-  * @brief   API del Nodo de una DLL de tipos dinamicos
+  * @brief   API del Nodo de una CLL de tipos dinamicos
 */
 
-#ifndef DLL_NODE_HPP
-#define DLL_NODE_HPP
+#ifndef CLL_NODE_HPP
+#define CLL_NODE_HPP
 
 #include <iostream>
 
@@ -16,7 +16,6 @@ class Node{
 private:
     Item data;
     Node* next;
-    Node* prev;
 public:
     //Constructor
     Node(Item _data);
@@ -27,12 +26,10 @@ public:
     //Getters
     Item getData();
     Node* getNext();
-    Node* getPrev();
 
     //Setters
     void setData(Item _data);
     void setNext(Node* _next);
-    void setPrev(Node* _prev);
 };
 
-#endif //DLL_NODE_HPP
+#endif //CLL_NODE_HPP

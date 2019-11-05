@@ -10,10 +10,10 @@
 
 template <class Item>
 DLL<Item>::DLL(){
-    SetFirst(NULL);
-    SetLast(NULL);
-    SetCursor(NULL);
-    SetLen(0);
+    setFirst(NULL);
+    setLast(NULL);
+    setCursor(NULL);
+    setLen(0);
 }
 
 template <class Item>
@@ -31,13 +31,13 @@ bool DLL<Item>::InsertFront(Item _data) {
         done = true;
 
         if(IsEmpty()){
-            SetFirst(n);
-            SetLast(n);
+            setFirst(n);
+            setLast(n);
         }
         else{
-            n->SetNext(GetFirst());
-            GetFirst()->SetPrev(n);
-            SetFirst(n);
+            n->setNext(getFirst());
+            getFirst()->setPrev(n);
+            setFirst(n);
         }
         lenUp();
     }
@@ -52,13 +52,13 @@ bool DLL<Item>::InsertBack(Item _data) {
         done = true;
 
         if(IsEmpty()){
-            SetFirst(n);
-            SetLast(n);
+            setFirst(n);
+            setLast(n);
         }
         else{
-            n->SetPrev(GetLast());
-            GetLast()->SetNext(n);
-            SetLast(n);
+            n->setPrev(getLast());
+            getLast()->setNext(n);
+            setLast(n);
         }
         lenUp();
     }
@@ -68,18 +68,18 @@ bool DLL<Item>::InsertBack(Item _data) {
 template <class Item>
 bool DLL<Item>::InsertAfter(Item _data) {
     bool done = false;
-    if(GetCursor()!=NULL){
-        if(GetCursor()==GetLast()){
+    if(getCursor()!=NULL){
+        if(getCursor()==getLast()){
             InsertBack(_data);
         }
         else{
             auto* n = new Node<Item>(_data);
             if(n){
                 done = true;
-                n->SetPrev(GetCursor());
-                n->SetNext(GetCursor()->GetNext());
-                GetCursor()->SetNext(n);
-                GetCursor()->GetNext()->SetPrev(n);
+                n->setPrev(getCursor());
+                n->setNext(getCursor()->getNext());
+                getCursor()->setNext(n);
+                getCursor()->getNext()->setPrev(n);
                 lenUp();
             }
         }
@@ -90,18 +90,18 @@ bool DLL<Item>::InsertAfter(Item _data) {
 template <class Item>
 bool DLL<Item>::InsertBefore(Item _data) {
     bool done = false;
-    if(GetCursor()!=NULL){
-        if(GetCursor()==GetFirst()){
+    if(getCursor()!=NULL){
+        if(getCursor()==getFirst()){
             InsertFront(_data);
         }
         else{
             auto* n = new Node<Item>(_data);
             if(n){
                 done = true;
-                n->SetNext(GetCursor());
-                n->SetPrev(GetCursor()->GetPrev());
-                GetCursor()->SetPrev(n);
-                GetCursor()->GetPrev()->SetNext(n);
+                n->setNext(getCursor());
+                n->setPrev(getCursor()->getPrev());
+                getCursor()->setPrev(n);
+                getCursor()->getPrev()->setNext(n);
                 lenUp();
             }
         }
@@ -113,20 +113,20 @@ bool DLL<Item>::InsertBefore(Item _data) {
 template <class Item>
 bool DLL<Item>::Remove(Item* _data_back){
     bool done = false;
-    if(GetCursor() != NULL){
-        if(GetCursor()==GetFirst()){
+    if(getCursor() != NULL){
+        if(getCursor()==getFirst()){
             RemoveFront(_data_back);
         }
-        else if(GetCursor()==GetLast()){
+        else if(getCursor()==getLast()){
             RemoveBack(_data_back);
         }
         else{
             done = true;
-            *_data_back = GetCursor()->GetData();
+            *_data_back = getCursor()->getData();
             Node<Item>* tmp;
-            tmp=GetCursor();
-            GetCursor()->GetPrev()->SetNext(GetCursor()->GetNext());
-            GetCursor()->GetNext()->SetPrev(GetCursor()->GetPrev());
+            tmp=getCursor();
+            getCursor()->getPrev()->setNext(getCursor()->getNext());
+            getCursor()->getNext()->setPrev(getCursor()->getPrev());
             tmp->~Node();
         }
         lenDown();
@@ -139,17 +139,17 @@ bool DLL<Item>::RemoveFront(Item* _data_back){
     bool done = false;
     if(!IsEmpty()){
         done = true;
-        *_data_back = GetFirst()->GetData();
+        *_data_back = getFirst()->getData();
         Node<Item>* tmp;
-        tmp=GetFirst()->GetNext();
-        if(GetLen()==1){
-            GetFirst()->~Node();
-            GetLast()->~Node();
+        tmp=getFirst()->getNext();
+        if(getLen()==1){
+            getFirst()->~Node();
+            getLast()->~Node();
         }
         else{
-            GetFirst()->~Node();
+            getFirst()->~Node();
         }
-        SetFirst(tmp);
+        setFirst(tmp);
         lenDown();
     }
     return done;
@@ -160,17 +160,17 @@ bool DLL<Item>::RemoveBack(Item* _data_back){
     bool done = false;
     if(!IsEmpty()){
         done = true;
-        *_data_back = GetLast()->GetData();
+        *_data_back = getLast()->getData();
         Node<Item>* tmp;
-        tmp=GetLast()->GetPrev();
-        if(GetLen()==1){
-            GetFirst()->~Node();
-            GetLast()->~Node();
+        tmp=getLast()->getPrev();
+        if(getLen()==1){
+            getFirst()->~Node();
+            getLast()->~Node();
         }
         else{
-            GetLast()->~Node();
+            getLast()->~Node();
         }
-        SetLast(tmp);
+        setLast(tmp);
         lenDown();
     }
     return done;
@@ -179,13 +179,13 @@ bool DLL<Item>::RemoveBack(Item* _data_back){
 template <class Item>
 bool DLL<Item>::RemoveAfter(Item* _data_back){
     bool done = false;
-    if(GetCursor()->GetNext() != NULL){
+    if(getCursor()->getNext() != NULL){
         done = true;
-        *_data_back = GetCursor()->GetNext()->GetData();
+        *_data_back = getCursor()->getNext()->getData();
         Node<Item>* tmp;
-        tmp=GetCursor()->GetNext();
-        GetCursor()->GetNext()->GetNext()->SetPrev(GetCursor());
-        GetCursor()->SetNext(GetCursor()->GetNext()->GetNext());
+        tmp=getCursor()->getNext();
+        getCursor()->getNext()->getNext()->setPrev(getCursor());
+        getCursor()->setNext(getCursor()->getNext()->getNext());
         tmp->~Node();
         lenDown();
     }
@@ -195,13 +195,13 @@ bool DLL<Item>::RemoveAfter(Item* _data_back){
 template <class Item>
 bool DLL<Item>::RemoveBefore(Item* _data_back){
     bool done = false;
-    if(GetCursor()->GetNext() != NULL){
+    if(getCursor()->getNext() != NULL){
         done = true;
-        *_data_back = GetCursor()->GetPrev()->GetData();
+        *_data_back = getCursor()->getPrev()->getData();
         Node<Item>* tmp;
-        tmp=GetCursor()->GetPrev();
-        GetCursor()->GetPrev()->GetPrev()->SetNext(GetCursor());
-        GetCursor()->SetPrev(GetCursor()->GetPrev()->GetPrev());
+        tmp=getCursor()->getPrev();
+        getCursor()->getPrev()->getPrev()->setNext(getCursor());
+        getCursor()->setPrev(getCursor()->getPrev()->getPrev());
         tmp->~Node();
         lenDown();
     }
@@ -212,9 +212,9 @@ bool DLL<Item>::RemoveBefore(Item* _data_back){
 template <class Item>
 bool DLL<Item>::Peek(Item* _data_back){
     bool done = false;
-    if(GetCursor() != NULL){
+    if(getCursor() != NULL){
         done = true;
-        *_data_back = GetCursor()->GetData();
+        *_data_back = getCursor()->getData();
     }
     return done;
 }
@@ -222,22 +222,22 @@ bool DLL<Item>::Peek(Item* _data_back){
 //Cursor
 template <class Item>
 void DLL<Item>::CursorFirst(){
-    SetCursor(GetFirst());
+    setCursor(getFirst());
 }
 
 template <class Item>
 void DLL<Item>::CursorLast(){
-    SetCursor(GetLast());
+    setCursor(getLast());
 }
 
 template <class Item>
 void DLL<Item>::CursorNext(){
-    SetCursor(GetCursor()->GetNext());
+    setCursor(getCursor()->getNext());
 }
 
 template <class Item>
 void DLL<Item>::CursorPrev(){
-    SetCursor(GetCursor()->GetPrev());
+    setCursor(getCursor()->getPrev());
 }
 
 //Empty
@@ -260,13 +260,13 @@ template <class Item>
 bool DLL<Item>::FindIf(Item _key, bool (*cmp)(Item,Item)){
     bool found = false;
     Node<Item>* tmp;
-    tmp=GetFirst();
-    for(size_t i = 0; i < GetLen(); i++){
-        if(cmp(_key, tmp->GetData())){
+    tmp=getFirst();
+    for(size_t i = 0; i < getLen(); i++){
+        if(cmp(_key, tmp->getData())){
             found = true;
             break;
         }
-        tmp = tmp->GetNext();
+        tmp = tmp->getNext();
     }
     return found;
 }
@@ -275,17 +275,17 @@ template <class Item>
 bool DLL<Item>::Search(Item _key, bool (*cmp)(Item,Item)){
     bool found = false;
     Node<Item>* tmp;
-    tmp=GetCursor();
-    SetCursor(GetFirst());
-    for(size_t i = 0; i < GetLen(); i++){
-        if(cmp(_key, GetCursor()->GetData())){
+    tmp=getCursor();
+    setCursor(getFirst());
+    for(size_t i = 0; i < getLen(); i++){
+        if(cmp(_key, getCursor()->getData())){
             found = true;
             break;
         }
         CursorNext();
     }
     if(!found){
-        SetCursor(tmp);
+        setCursor(tmp);
     }
     return found;
 }
@@ -294,10 +294,10 @@ bool DLL<Item>::Search(Item _key, bool (*cmp)(Item,Item)){
 template<class Item>
 void DLL<Item>::TraverseBool(bool (*func)(Item)){
     Node<Item>* tmp;
-    tmp=GetFirst();
-    for(size_t i = 0; i < GetLen(); i++){
-        func(tmp->GetData());
-        tmp = tmp->GetNext();
+    tmp=getFirst();
+    for(size_t i = 0; i < getLen(); i++){
+        func(tmp->getData());
+        tmp = tmp->getNext();
     }
     tmp->~Node();
 }
@@ -305,10 +305,10 @@ void DLL<Item>::TraverseBool(bool (*func)(Item)){
 template<class Item>
 void DLL<Item>::TraverseVoid(void (*func)(Item)){
     Node<Item>* tmp;
-    tmp=GetFirst();
-    for(size_t i = 0; i < GetLen(); i++){
-        func(tmp->GetData());
-        tmp = tmp->GetNext();
+    tmp=getFirst();
+    for(size_t i = 0; i < getLen(); i++){
+        func(tmp->getData());
+        tmp = tmp->getNext();
     }
     tmp->~Node();
 }
