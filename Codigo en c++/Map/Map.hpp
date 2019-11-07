@@ -16,7 +16,7 @@ typedef size_t(*pHash)(string key, size_t max);
 template <typename ItemOne, typename ItemTwo>
 class Map{
 	private:
-		DLL<Entry*> **table;
+		DLL<Entry> **table;
 		size_t size;
 		size_t len;
 		size_t empty;
@@ -31,6 +31,8 @@ class Map{
 		size_t Iterator(void(*pfun)(ItemOne key, ItemTwo value));
 		size_t getLen();
 		size_t getSize();
+		ItemTwo getItemTwo(ItemOne key);
+		void printValues();
 };
 
 #endif

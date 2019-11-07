@@ -16,6 +16,10 @@ private:
     ItemTwo last;
 public:
     //Constructor
+    Couple(){
+
+    }
+    
     Couple(ItemOne _first, ItemTwo _last){
         first = _first;
         last = _last;
@@ -32,7 +36,7 @@ public:
 
     //Setters
     void setOne(ItemOne _first){first = _first;};
-    void setTow(ItemTwo _last){last = _last;}
+    void setTwo(ItemTwo _last){last = _last;}
 
 };
 

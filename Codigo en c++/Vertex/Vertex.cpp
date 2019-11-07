@@ -10,6 +10,10 @@ Vertex::Vertex(string _name){
 	this -> neighbors = new DLL<Vertex>();
 }
 
+void Vertex::setName(string _name){
+	this -> name = _name;
+}
+
 string Vertex::getName(){
 	return this -> name;
 }
@@ -66,8 +70,8 @@ int Vertex::getDiscoveryTime(){
 	return this -> discovery_time;
 }
 
-void Vertex::addNeighbors(Vertex v){
-	this -> neighbors -> InsertBack(v);
+bool Vertex::addNeighbors(Vertex v){
+	return this -> neighbors -> InsertBack(v);
 }
 
 void Vertex::print(){

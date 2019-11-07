@@ -23,6 +23,7 @@ class Vertex{
 	public:
 		Vertex();
 		Vertex(string _name);
+		void setName(string _name);
 		string getName();
 		int getIntName();
 		int getDistance();
@@ -37,7 +38,7 @@ class Vertex{
 		int getFinishTime();
 		void setDiscoveryTime(int _time);
 		int getDiscoveryTime();
-		void addNeighbors(Vertex v);
+		bool addNeighbors(Vertex v);
 		void print();
 
 };

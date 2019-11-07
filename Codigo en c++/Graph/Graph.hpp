@@ -3,7 +3,7 @@
 #include <iostream>
 #include "../Stack/Stack.hpp"
 #include "../Vertex/Vertex.hpp"
-#include "../Map/Map.hpp"
+#include "../Couple/Couple.hpp"
 
 using namespace std;
 
@@ -11,10 +11,11 @@ using namespace std;
 
 class Graph{
 	private:
-		Map<string,Vertex> *vertices;
+		DLL<Couple<string, Vertex>> *vertices;
 		static int time;
 		void gotoVertex(Vertex v1, string _v2, Stack<string> stack);
-		static size_t hash(string key, size_t max);
+		static bool compareCouple(Couple <string,Vertex> c1, Couple <string,Vertex> c2);
+		static void printVertex(Couple <string,Vertex> couple);
 	public: 
 		Graph();
 		bool contains(string name);
@@ -22,8 +23,7 @@ class Graph{
 		bool addEdge(string b1, string b2);
 		bool addEdgeDirected(string b1, string b2);
 		Vertex getVertex(string v);
-		Vertex getVertex(int v);
-		Map<string,Vertex> getMap();
+		DLL<Couple<string, Vertex>> *getMap();
 		void print();
 		void BSF(Vertex start);
 		void DFS(Vertex start);

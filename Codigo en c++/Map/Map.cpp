@@ -37,7 +37,7 @@ bool Map<ItemOne,ItemTwo>::Insert(ItemOne key, ItemTwo value){
 	tmp.value = value;
 	bool done = false;
 
-	if(table[loc] -> InsertBack(&tmp)){
+	if(table[loc] -> InsertBack(tmp)){
 		done = true;
 		++this -> len;
 	}
@@ -66,7 +66,7 @@ bool Map<ItemOne,ItemTwo>::Remove(ItemOne key){
 	tmp -> key = key;
 
 	if(this -> table[loc] -> Search(&tmp,Compare)){
-		if(this -> table[loc] -> Remove(&tmp)){
+		if(this -> table[loc] -> Remove(tmp)){
 			--this -> len;
 			return true;
 		}
@@ -96,4 +96,22 @@ size_t Map<ItemOne,ItemTwo>::getLen(){
 template <typename ItemOne, typename ItemTwo>
 size_t Map<ItemOne,ItemTwo>::getSize(){
 	return size;
+}
+
+template <typename ItemOne, typename ItemTwo>
+ItemTwo Map<ItemOne,ItemTwo>::getItemTwo(ItemOne key){
+	ItemTwo tmp;
+	if(this -> Retrieve(key,*tmp)){
+		return tmp;
+	}
+
+}
+template <typename ItemOne, typename ItemTwo>
+void Map<ItemOne,ItemTwo>::printValues(){
+
+	for( size_t i = 0; i < this->size; ++i ){
+		for(Node<Entry*> *it = this -> table[i]-> first; it != NULL; it = it -> next){
+			it -> data -> value.print();
+		}
+	}
 }
