@@ -25,11 +25,7 @@ class Graph{
 		Vertex getVertex(string v);
 		DLL<Couple<string, Vertex>> *getMap();
 		void print();
-		void BSF(Vertex start);
-		void DFS(Vertex start);
-		void dfsTraverse(Vertex v);
-		void updateColor(Stack<string> stack);
-		void goToVertex(string _v1, string _v2);
+		Stack<string> DIJKSTRA(Vertex start, Vertex end);
 };
 
 

@@ -86,14 +86,9 @@ void Graph::print(){
 	cout << endl;
 	this -> vertices -> TraverseVoid(printVertex);
 }
-void Graph::BSF(Vertex start){
-	for(size_t i =0; i< this -> vertices -> Len(); i++){
-		
-	}
+
+Stack<string> Graph::DIJKSTRA(Vertex start, Vertex end){
+	
 }
-void Graph::DFS(Vertex start);
-void Graph::dfsTraverse(Vertex v);
-void Graph::updateColor(Stack<string> stack);
-void Graph::goToVertex(string _v1, string _v2);
 
 

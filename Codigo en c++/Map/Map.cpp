@@ -1,40 +1,27 @@
 #include "Map.hpp"
 
 template <typename ItemOne, typename ItemTwo>
-bool Map<ItemOne,ItemTwo>::Compare(Entry e1,Entry e2){
-	if(e1.key.compare(e2.key) == 0){
-		return true;
-	}
+Map<ItemOne,ItemTwo>::Map(size_t capacity, Couple<ItemOne, ItemTwo> empty_val){
+	this -> table = new Couple <ItemOne,ItemTwo>[capacity];
 
-	return false;
-}
-template <typename ItemOne, typename ItemTwo>
-Map<ItemOne,ItemTwo>::Map(size_t capacity, size_t empty_val, pHash hash){
-	this -> table = new DLL<Entry*>();
-
-	for(size_t i = 0; i <capacity; ++i){table[i] = new DLL<Entry*>;}
+	for(size_t i = 0; i <capacity; ++i){table[i] = empty_val;}
 
 		this -> size = capacity;
 		this -> len = 0L;
 		this -> empty = empty_val;
-		this -> hash = hash;
 }
 template <typename ItemOne, typename ItemTwo>
 Map<ItemOne,ItemTwo>::~Map(){
 	assert(this);
-
-	for(size_t i = 0; i < this -> size; ++i){
-		table[i] -> ~DLL();
-	}
-
-	delete(this);
+	
+	delete(this -> table);
+	delete (this);
 }
 template <typename ItemOne, typename ItemTwo>
 bool Map<ItemOne,ItemTwo>::Insert(ItemOne key, ItemTwo value){
-	size_t loc = this -> hash(key,this -> size);
-	Entry tmp;
-	tmp.key = key;
-	tmp.value = value;
+	string loc = this -> hash(key,this -> size);
+	Couple<ItemOne,ItemTwo> tmp;
+	
 	bool done = false;
 
 	if(table[loc] -> InsertBack(tmp)){
