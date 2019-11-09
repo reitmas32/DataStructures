@@ -1,37 +1,25 @@
-#ifndef  MAP_HPP
-#define  MAP_HPP
+#ifndef MAP_HPP
+#define MAP_HPP
 
 #include <iostream>
 #include <stdlib.h>
 #include <assert.h>
-#include <stdbool.h>
-#include <iso646.h>
-#include <stdint.h>
-#include "../DLL/DLL.hpp"
 #include "../Couple/Couple.hpp"
-#include <string>
-
-typedef size_t(*pHash)( string key, size_t max);
 
 template <typename ItemOne, typename ItemTwo>
 class Map{
 	private:
-		Couple<ItemOne, ItemTwo> *table;
+		Couple<ItemOne,ItemTwo> *table;
 		size_t size;
 		size_t len;
-		size_t empty;
+		ItemOne empty;
+		typedef size_t (*pHash)(size_t key, size_t max);
+		typedef size_t (*pCollRes)( size_t index, size_t max);
 		pHash hash;
+		pCollRes coll_res;
 	public:
-		Map(size_t capacity, Couple<ItemOne,ItemTwo> empty_val);
+		Map();
 		~Map();
-		bool Insert(ItemOne key, ItemTwo value);
-		bool Retrieve(ItemOne key, ItemTwo *value);
-		bool Remove(ItemOne key);
-		size_t Iterator(void(*pfun)(ItemOne key, ItemTwo value));
-		size_t getLen();
-		size_t getSize();
-		ItemTwo getItemTwo(ItemOne key);
-		void printValues();
-};
 
+};
 #endif
