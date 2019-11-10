@@ -23,8 +23,8 @@ int main(){
     tablero.addEdge("C","D");
     tablero.addEdge("C","E");
     tablero.addEdge("D","F");
-    tablero.addEdge("F","E");
     tablero.addEdge("F","G");
+    tablero.addEdge("F","E");
 
 
 	tablero.print(0);
