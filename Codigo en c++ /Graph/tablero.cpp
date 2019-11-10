@@ -8,11 +8,11 @@ using namespace std;
 
 int main(){
 
-	Graph tablero(65);
+	Graph tablero(300);
 #if 1
 	string letras[TAM] = {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","Ñ","O","P","Q","R","S","T","U","V","W","X","Y","Z"
 					   ,"A1","B1","C1","D1","E1","F1","G1","H1","I1","J1","K1","L1","M1","N1","Ñ1","O1","P1","Q1","R1","S1","T1","U1","V1","W1","X1","Y1","Z1"
-					   ,"A2","B2","C2","D2","E2","F2","G2","H2","I2","J2"};
+					   ,"A2","B2","C2","D2","E2","F2","G2","H3","I2","J2"};
 
 #endif	
 	for(size_t i = 0; i<TAM; i++){
@@ -97,11 +97,13 @@ int main(){
 	tablero.addEdge("D2","E2");
 	tablero.addEdge("E2","F2");
 	tablero.addEdge("W1","G2");
-	tablero.addEdge("A2","H2");
+	tablero.addEdge("A2","H3");
 	tablero.addEdge("B2","I2");
 	tablero.addEdge("F2","J2");
-	tablero.addEdge("G2","H2");
-	tablero.addEdge("H2","I2");
+	tablero.addEdge("G2","H3");
+	tablero.addEdge("H3","I2");
 	tablero.addEdge("I2","J2");
+
+	tablero.print(0);
 	return 0;
 }

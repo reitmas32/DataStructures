@@ -39,6 +39,7 @@ class Vertex{
 		void setDiscoveryTime(int _time);
 		int getDiscoveryTime();
 		bool addNeighbors(Vertex v);
+		void print_neighbors();
 		void print();
 
 };

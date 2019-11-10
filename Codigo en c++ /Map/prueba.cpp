@@ -27,6 +27,9 @@ int main(){
 	dictionary -> Insert(10,9);
 	dictionary -> Insert(100,90);
 	dictionary -> Iterator(print);
+	cout << "===================\n";
+	dictionary -> Remove(10);
+	dictionary -> Iterator(print);
 	delete dictionary;
 	return 0;
 }

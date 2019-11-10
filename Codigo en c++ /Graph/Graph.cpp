@@ -16,12 +16,18 @@ size_t Graph::coll_res( size_t index, size_t max ){
 	 size_t new_index = (index + 1) % max;
 	 return new_index;
 }
-#if 1
+
+void Graph::printNeighbors(string name, Vertex vertex){
+
+	cout << "\n" << vertex.getName() << ": ";
+	vertex.print_neighbors();
+	cout <<endl;		
+}
+
 void Graph::printVertex(string name, Vertex vertex){
 	vertex.print();
 	cout << endl;
 }
-#endif
 
 //===========================================================
 
@@ -93,9 +99,17 @@ Map<string,Vertex>  *Graph::getMap(){
 	return this -> vertices;
 }
 
-void Graph::print(){
+void Graph::print(size_t modo){
 	cout << endl;
-	this -> vertices -> Iterator(printVertex);
+	switch(modo){
+		case 0:
+			this -> vertices -> Iterator(printNeighbors);
+			break;
+		case 1:
+			this -> vertices ->Iterator(printVertex);
+			break;
+	}
+
 }
 #if 0
 Stack<string> Graph::DIJKSTRA(Vertex start, Vertex end){

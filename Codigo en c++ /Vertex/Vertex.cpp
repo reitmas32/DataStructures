@@ -92,3 +92,16 @@ void Vertex::print(){
 	     << "  " << this -> getDistance() << "  " << this -> getDiscoveryTime() 
 	     << "/" << this -> getFinishTime() << "  " << "\t" << color;
 }
+
+void Vertex::print_neighbors(){
+
+	Vertex v;
+
+	this -> neighbors ->CursorFirst();
+	for(size_t i = 0; i< this -> neighbors ->Len(); i++){
+		this -> neighbors -> Peek(&v);
+		cout << v.getName() << "-> ";
+		this -> neighbors ->CursorNext();
+	}
+	std::cout << "Nil";
+}
