@@ -18,7 +18,7 @@ DLL<Item>::DLL(){
 
 template <class Item>
 DLL<Item>::~DLL(){
-    //MekeEmpty();
+    this ->MekeEmpty();
     free(this);
 }
 

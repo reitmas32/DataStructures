@@ -27,7 +27,7 @@ public:
 
     //Destructor
     ~Couple(){
-        free(this);
+      
     }
 
     //Getters
