@@ -3,7 +3,8 @@
 #include <iostream>
 #include "../Stack/Stack.hpp"
 #include "../Vertex/Vertex.hpp"
-#include "../Couple/Couple.hpp"
+#include "../Map/Map.hpp"
+#include <string.h>
 
 using namespace std;
 
@@ -11,19 +12,21 @@ using namespace std;
 
 class Graph{
 	private:
-		DLL<Couple<string, Vertex>> *vertices;
+		Map<string,Vertex> *vertices;
 		static int time;
 		void gotoVertex(Vertex v1, string _v2, Stack<string> stack);
-		static bool compareCouple(Couple <string,Vertex> c1, Couple <string,Vertex> c2);
-		static void printVertex(Couple <string,Vertex> couple);
+		static size_t hash_string(string key, size_t max);
+		static void printVertex(string name, Vertex vertex);
+		static size_t coll_res( size_t index, size_t max );
 	public: 
-		Graph();
+		Graph(size_t capacity);
+		~Graph();
 		bool contains(string name);
 		bool addVertex(Vertex v);
 		bool addEdge(string b1, string b2);
 		bool addEdgeDirected(string b1, string b2);
 		Vertex getVertex(string v);
-		DLL<Couple<string, Vertex>> *getMap();
+		Map<string,Vertex> *getMap();
 		void print();
 		Stack<string> DIJKSTRA(Vertex start, Vertex end);
 };

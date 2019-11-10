@@ -1,37 +1,45 @@
 #include "Graph.hpp"
 
-bool Graph::compareCouple(Couple <string,Vertex> c1, Couple <string,Vertex> c2){
+size_t Graph::hash_string(string key, size_t max){
+	const char *newKey = key.c_str();
+	int length = strlen(newKey);
 
-	if(c1.getOne() == c2.getOne()){
-		return true;
+	int i,sum;
+
+	for(sum =0, i=0; i< length; i++){
+		sum += newKey[i];
 	}
 
-	return false;
+	return sum % max;
 }
-
-void Graph::printVertex(Couple <string,Vertex> couple){
-	Vertex vertex = couple.getTwo();
-
+size_t Graph::coll_res( size_t index, size_t max ){
+	 size_t new_index = (index + 1) % max;
+	 return new_index;
+}
+#if 1
+void Graph::printVertex(string name, Vertex vertex){
 	vertex.print();
 }
+#endif
+//===========================================================
 
-Graph::Graph(){
-	this -> vertices = new DLL<Couple<string, Vertex>>();
+Graph::Graph(size_t capacity){
+	this -> vertices = new Map<string,Vertex>(capacity,"",hash_string,coll_res);
+}
+
+Graph::~Graph(){
+	delete this -> vertices;
 }
 
 bool Graph::contains(string name){
-	Couple<string, Vertex> tmp;
+	Vertex tmp;
 
-	return vertices -> FindIf(tmp,compareCouple);
+	return this ->vertices -> Retrieve(name,&tmp);
 }
 
 bool Graph::addVertex(Vertex v){
-	Couple<string, Vertex> tmp;
 
-	tmp.setOne(v.getName());
-	tmp.setTwo(v);
-
-	return (this -> vertices -> InsertBack(tmp));
+	return (this -> vertices -> Insert(v.getName(),v));
 }
 
 bool Graph::addEdge(string b1, string b2){
@@ -39,12 +47,10 @@ bool Graph::addEdge(string b1, string b2){
 	Vertex v1(b1);
 	Vertex v2(b2);
 
-	Couple<string, Vertex> couple1(b1,v1);
-	Couple<string, Vertex> couple2(b2,v2);
-
-
-	if(this -> vertices -> Remove(&couple1) && this -> vertices -> Remove(&couple2)){
+	if(this -> vertices -> Retrieve(b1,&v1) && this -> vertices -> Retrieve(b2,&v2)){
 		if(v1.addNeighbors(v2) && v2.addNeighbors(v1)){
+			this -> vertices -> Remove(b1);
+			this -> vertices -> Remove(b2);
 			this -> addVertex(v1);
 			this -> addVertex(v2);
 			return true;	
@@ -53,42 +59,44 @@ bool Graph::addEdge(string b1, string b2){
 
 	return false;
 }
+
+
 bool Graph::addEdgeDirected(string b1, string b2){
 
 	Vertex v1(b1);
 	Vertex v2(b2);
-	Couple<string, Vertex> couple(b1,v1);
 
-	if(this -> vertices -> Remove(&couple)){
+	if(this -> vertices -> Retrieve(b1,&v1) && this -> vertices -> Retrieve(b2,&v2)){
 		if(v1.addNeighbors(v2)){
+			this -> vertices -> Remove(b1);
 			this -> addVertex(v1);
 			return true;	
 		}
 	}
 
 	return false;
+
 }
 
 Vertex Graph::getVertex(string v){
-	Couple<string, Vertex> tmp(v,(Vertex){"tmp"});
+	Vertex vertex(v);
 
-	this -> vertices -> Search(tmp,compareCouple);
-	this -> vertices -> Peek(&tmp);
+	this -> vertices -> Retrieve(v,&vertex);
 
-	return tmp.getTwo();
+	return vertex;
 }
 
-DLL<Couple<string, Vertex>> *Graph::getMap(){
+Map<string,Vertex>  *Graph::getMap(){
 	return this -> vertices;
 }
 
 void Graph::print(){
 	cout << endl;
-	this -> vertices -> TraverseVoid(printVertex);
+	this -> vertices -> Iterator(printVertex);
 }
-
+#if 0
 Stack<string> Graph::DIJKSTRA(Vertex start, Vertex end){
 	
 }
-
+#endif
 

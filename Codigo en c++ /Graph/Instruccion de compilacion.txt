@@ -1,0 +1,1 @@
+g++ Graph.cpp tablero.cpp ../Vertex/Vertex.cpp -o g
