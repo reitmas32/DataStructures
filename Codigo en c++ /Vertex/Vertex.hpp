@@ -13,10 +13,10 @@ class Vertex{
 	private:
 		string name;
 		DLL<Vertex> *neighbors;
-		int distance = 0;
+		int distance;
 		Colors color{Colors::BLACK};
-		string predecesor = "";
-		int weigth = 0;
+		string predecesor;
+		int weigth;
 		int discovery_time;
 		int finish_time;
 

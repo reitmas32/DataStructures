@@ -19,11 +19,14 @@ size_t Graph::coll_res( size_t index, size_t max ){
 #if 1
 void Graph::printVertex(string name, Vertex vertex){
 	vertex.print();
+	cout << endl;
 }
 #endif
+
 //===========================================================
 
 Graph::Graph(size_t capacity){
+	Vertex null;
 	this -> vertices = new Map<string,Vertex>(capacity,"",hash_string,coll_res);
 }
 

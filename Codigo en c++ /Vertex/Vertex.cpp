@@ -8,6 +8,11 @@ Vertex::Vertex(){
 Vertex::Vertex(string _name){
 	this -> name = _name;
 	this -> neighbors = new DLL<Vertex>();
+	this -> distance = 0;
+	this -> predecesor = "";
+	this -> weigth = 0;
+	this -> discovery_time=0;
+	this -> finish_time=0;
 }
 
 void Vertex::setName(string _name){
