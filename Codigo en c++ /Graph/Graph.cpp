@@ -10,7 +10,7 @@ size_t Graph::hash_string(string key, size_t max){
 		sum += newKey[i];
 	}
 
-	return sum % max;
+	return sum %max;
 }
 size_t Graph::coll_res( size_t index, size_t max ){
 	 size_t new_index = (index + 1) % max;
